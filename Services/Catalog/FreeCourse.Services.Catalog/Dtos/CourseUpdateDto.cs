@@ -5,8 +5,7 @@ using System.Threading.Tasks;
 
 namespace FreeCourse.Services.Catalog.Dtos
 {
-    public class FeatureDto
+    public class CourseUpdateDto
     {
-        public int Duration { get; set; }
     }
 }
