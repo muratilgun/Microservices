@@ -100,8 +100,17 @@ namespace FreeCourse.Services.Catalog.Services
         }
         public async Task<Response<NoContent>> DeleteAsync(string id)
         {
-            throw new NotImplementedException();
+            var result = await _courseCollection.DeleteOneAsync(x => x.Id == id);
+            if (result.DeletedCount>0)
+            {
+                return Response<NoContent>.Success(204);
+            }
+            else
+            {
+                return Response<NoContent>.Fail("Course not found", 404);
+            }
         }
+        
 
 
         
