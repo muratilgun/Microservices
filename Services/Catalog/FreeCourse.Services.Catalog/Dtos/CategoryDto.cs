@@ -7,7 +7,7 @@ namespace FreeCourse.Services.Catalog.Dtos
 {
     internal class CategoryDto
     {
-        string Id { get; set; }
-        string Name { get; set; }
+        public string Id { get; set; }
+        public string Name { get; set; }
     }
 }

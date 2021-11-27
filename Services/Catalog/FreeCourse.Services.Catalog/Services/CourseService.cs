@@ -88,16 +88,22 @@ namespace FreeCourse.Services.Catalog.Services
             await _courseCollection.InsertOneAsync(newCourse);
             return Response<CourseDto>.Success(_mapper.Map<CourseDto>(newCourse),200);
         }
-
+        public async Task<Response<NoContent>> UpdateAsync(CourseUpdateDto courseUpdateDto)
+        {
+            var updateCourse = _mapper.Map<Course>(courseUpdateDto);
+            var result = await _courseCollection.FindOneAndReplaceAsync(x => x.Id == courseUpdateDto.Id, updateCourse);
+            if (result == null)
+            {
+                return Response<NoContent>.Fail("Course not found", 404);
+            }
+            return Response<NoContent>.Success(204);
+        }
         public async Task<Response<NoContent>> DeleteAsync(string id)
         {
             throw new NotImplementedException();
         }
 
 
-        public async Task<Response<NoContent>> UpdateAsync(CourseUpdateDto courseUpdateDto)
-        {
-            throw new NotImplementedException();
-        }
+        
     }
 }

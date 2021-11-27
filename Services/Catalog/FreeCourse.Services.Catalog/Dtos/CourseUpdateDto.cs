@@ -7,14 +7,14 @@ namespace FreeCourse.Services.Catalog.Dtos
 {
     internal class CourseUpdateDto
     {
-         string Id { get; set; }
-         string Name { get; set; }
-         string Description { get; set; }
-         decimal Price { get; set; }
-         string UserId { get; set; }
-         string Picture { get; set; }
+        public string Id { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
+        public decimal Price { get; set; }
+        public string UserId { get; set; }
+        public string Picture { get; set; }
 
-         FeatureDto Feature { get; set; }
-         string CategoryId { get; set; }
+        public FeatureDto Feature { get; set; }
+        public string CategoryId { get; set; }
     }
 }
