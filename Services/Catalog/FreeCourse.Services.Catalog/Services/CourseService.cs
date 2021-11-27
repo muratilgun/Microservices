@@ -15,10 +15,7 @@ namespace FreeCourse.Services.Catalog.Services
     {
         private readonly IMongoCollection<Course> _courseCollection;
         private readonly IMongoCollection<Category> _categoryCollection;
-
-
         private readonly IMapper _mapper;
-
         public CourseService( IMapper mapper,IDatabaseSettings databaseSettings)
         {
             var client = new MongoClient(databaseSettings.ConnectionStrings);
@@ -27,7 +24,6 @@ namespace FreeCourse.Services.Catalog.Services
             _categoryCollection = database.GetCollection<Category>(databaseSettings.CategoryCollectionName);
             _mapper = mapper;
         }
-
         public async Task<Response<List<CourseDto>>> GetAllAsync()
         {
             var courses = await _courseCollection.Find(course => true).ToListAsync();
@@ -60,7 +56,6 @@ namespace FreeCourse.Services.Catalog.Services
 
             return Response<CourseDto>.Success(_mapper.Map<CourseDto>(course), 200);
         }
-
         public async Task<Response<List<CourseDto>>> GetAllByUserIdAsync(string userId)
         {
             var courses = await _courseCollection.Find<Course>(x => x.UserId == userId).ToListAsync();
@@ -80,7 +75,6 @@ namespace FreeCourse.Services.Catalog.Services
 
             return Response<List<CourseDto>>.Success(_mapper.Map<List<CourseDto>>(courses), 200);
         }
-
         public async Task<Response<CourseDto>> CreateAsync(CourseCreateDto courseCreateDto)
         {
             var newCourse = _mapper.Map<Course>(courseCreateDto);
@@ -110,9 +104,5 @@ namespace FreeCourse.Services.Catalog.Services
                 return Response<NoContent>.Fail("Course not found", 404);
             }
         }
-        
-
-
-        
     }
 }
