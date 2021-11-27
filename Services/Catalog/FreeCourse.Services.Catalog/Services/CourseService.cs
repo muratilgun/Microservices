@@ -83,7 +83,10 @@ namespace FreeCourse.Services.Catalog.Services
 
         public async Task<Response<CourseDto>> CreateAsync(CourseCreateDto courseCreateDto)
         {
-            throw new NotImplementedException();
+            var newCourse = _mapper.Map<Course>(courseCreateDto);
+            newCourse.CreatedTime = DateTime.Now;
+            await _courseCollection.InsertOneAsync(newCourse);
+            return Response<CourseDto>.Success(_mapper.Map<CourseDto>(newCourse),200);
         }
 
         public async Task<Response<NoContent>> DeleteAsync(string id)
