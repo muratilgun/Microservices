@@ -8,18 +8,18 @@ using System.Threading.Tasks;
 
 namespace FreeCourse.Services.Catalog.Dtos
 {
-    public class CourseDto
+    internal class CourseDto
     {
 
-        public string Id { get; set; }
-        public string Name { get; set; }
-        public string Description { get; set; }
-        public decimal Price { get; set; }
-        public string UserId { get; set; }
-        public string Picture { get; set; }
-        public DateTime CreatedTime { get; set; }
-        public FeatureDto Feature { get; set; }
-        public string CategoryId { get; set; }
-        public CategoryDto Category { get; set; }
+        string Id { get; set; }
+        string Name { get; set; }
+        string Description { get; set; }
+        decimal Price { get; set; }
+        string UserId { get; set; }
+        string Picture { get; set; }
+        DateTime CreatedTime { get; set; }
+        FeatureDto Feature { get; set; }
+        string CategoryId { get; set; }
+        CategoryDto Category { get; set; }
     }
 }
