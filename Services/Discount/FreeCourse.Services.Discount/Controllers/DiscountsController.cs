@@ -8,6 +8,7 @@ using FreeCourse.Services.Discount.Services;
 using FreeCourse.Shared.ControllerBases;
 using FreeCourse.Shared.Dtos;
 using FreeCourse.Shared.Services;
+using Microsoft.AspNetCore.Authorization;
 
 namespace FreeCourse.Services.Discount.Controllers
 {
@@ -34,8 +35,8 @@ namespace FreeCourse.Services.Discount.Controllers
             var discount = await _discountService.GetById(id);
             return CreateActionResultInstance(discount);
         }
-        [HttpGet]
-        [Route("api/[controller]/[action]/{code}")]
+
+        [HttpGet("[action]/{code}")]
         public async Task<IActionResult> GetByCode(string code)
         {
             var userId = _sharedIdentityService.GetUserId;
