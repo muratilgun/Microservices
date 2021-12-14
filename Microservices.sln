@@ -37,14 +37,28 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Order", "Order", "{0CA82343-6FA0-4211-9417-E6D9E36F314E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FreeCourse.Services.Order.API", "Services\Order\FreeCourse.Services.Order.API\FreeCourse.Services.Order.API.csproj", "{68C7ED18-6FDD-485C-B2EF-2062D8D46112}"
+	ProjectSection(ProjectDependencies) = postProject
+		{D2BEC69C-508B-4D67-A556-002B1ED4F150} = {D2BEC69C-508B-4D67-A556-002B1ED4F150}
+		{7694F2A7-D909-431E-84F4-7050C21B932D} = {7694F2A7-D909-431E-84F4-7050C21B932D}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FreeCourse.Services.Order.Application", "Services\Order\FreeCourse.Services.Order.Application\FreeCourse.Services.Order.Application.csproj", "{7694F2A7-D909-431E-84F4-7050C21B932D}"
+	ProjectSection(ProjectDependencies) = postProject
+		{E2385A00-81A6-4C02-8DA0-9CAD5868F6AC} = {E2385A00-81A6-4C02-8DA0-9CAD5868F6AC}
+		{FA33C678-D51D-41AB-97F8-42DF55A234A6} = {FA33C678-D51D-41AB-97F8-42DF55A234A6}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FreeCourse.Services.Order.Domain", "Services\Order\FreeCourse.Services.Order.Domain\FreeCourse.Services.Order.Domain.csproj", "{FA33C678-D51D-41AB-97F8-42DF55A234A6}"
+	ProjectSection(ProjectDependencies) = postProject
+		{FCCE3410-4D7F-48C8-A09C-2A6966E29682} = {FCCE3410-4D7F-48C8-A09C-2A6966E29682}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FreeCourse.Services.Order.Domain.Core", "Services\Order\FreeCourse.Services.Order.Domain.Core\FreeCourse.Services.Order.Domain.Core.csproj", "{FCCE3410-4D7F-48C8-A09C-2A6966E29682}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FreeCourse.Services.Order.Infrastructure", "Services\Order\FreeCourse.Services.Order.Infrastructure\FreeCourse.Services.Order.Infrastructure.csproj", "{E2385A00-81A6-4C02-8DA0-9CAD5868F6AC}"
+	ProjectSection(ProjectDependencies) = postProject
+		{FA33C678-D51D-41AB-97F8-42DF55A234A6} = {FA33C678-D51D-41AB-97F8-42DF55A234A6}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
