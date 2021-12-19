@@ -22,7 +22,7 @@ namespace FreeCourse.Services.Order.Application.Handlers
             _context = context;
         }
 
-
+        //CQRS üzerinden çalışılması gerekiyor
         public async Task<Response<CreatedOrderDto>> Handle(CreateOrderCommand request, CancellationToken cancellationToken)
         {
             var newAdress = new Address(request.Address.Province, request.Address.District, request.Address.ZipCode,request.Address.Street, request.Address.Line);
