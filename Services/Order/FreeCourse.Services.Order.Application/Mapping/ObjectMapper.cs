@@ -18,5 +18,7 @@ namespace FreeCourse.Services.Order.Application.Mapping
             });
             return config.CreateMapper();
         });
+
+        public static IMapper Mapper => lazy.Value;
     }
 }
