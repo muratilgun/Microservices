@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using FreeCourse.Services.Order.Application.Commands;
 using FreeCourse.Services.Order.Application.Queries;
 using FreeCourse.Shared.ControllerBases;
 using FreeCourse.Shared.Services;
@@ -28,6 +29,13 @@ namespace FreeCourse.Services.Order.API.Controllers
         public async Task<IActionResult> GetOrders()
         {
             var response = await _mediator.Send(new GetOrdersByUserIdQuery{UserId = _identityService.GetUserId});
+            return CreateActionResultInstance(response);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> SaveOrder(CreateOrderCommand createOrderCommand)
+        {
+            var response = await _mediator.Send(createOrderCommand);
             return CreateActionResultInstance(response);
         }
     }
