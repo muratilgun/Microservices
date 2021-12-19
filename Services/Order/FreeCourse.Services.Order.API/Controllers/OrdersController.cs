@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using FreeCourse.Services.Order.Application.Queries;
 using FreeCourse.Shared.ControllerBases;
 using FreeCourse.Shared.Services;
 using MediatR;
@@ -21,6 +22,13 @@ namespace FreeCourse.Services.Order.API.Controllers
         {
             _mediator = mediator;
             _identityService = identityService;
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetOrders()
+        {
+            var response = await _mediator.Send(new GetOrdersByUserIdQuery{UserId = _identityService.GetUserId});
+            return CreateActionResultInstance(response);
         }
     }
 }
