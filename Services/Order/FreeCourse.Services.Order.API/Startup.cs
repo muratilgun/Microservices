@@ -11,6 +11,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using FreeCourse.Services.Order.Infrastructure;
+using FreeCourse.Shared.Services;
+using MediatR;
 using Microsoft.EntityFrameworkCore;
 
 namespace FreeCourse.Services.Order.API
@@ -35,7 +37,9 @@ namespace FreeCourse.Services.Order.API
                     configure.MigrationsAssembly("FreeCourse.Services.Order.Infrastructure");
                 });
             });
-
+            services.AddHttpContextAccessor();
+            services.AddScoped<ISharedIdentityService, SharedIdentityService>();
+            services.AddMediatR(typeof(Application.Handlers.CreateOrderCommandHandler).Assembly);
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
