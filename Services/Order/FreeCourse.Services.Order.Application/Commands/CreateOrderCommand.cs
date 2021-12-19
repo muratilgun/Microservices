@@ -9,6 +9,7 @@ using MediatR;
 
 namespace FreeCourse.Services.Order.Application.Commands
 {
+
     public class CreateOrderCommand : IRequest<Response<CreatedOrderDto>>
     {
         public string BuyerId { get; set; }
