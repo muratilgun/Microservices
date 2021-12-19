@@ -14,6 +14,10 @@ using FreeCourse.Services.Order.Infrastructure;
 using FreeCourse.Shared.Services;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.Authorization;
+using System.IdentityModel.Tokens.Jwt;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 namespace FreeCourse.Services.Order.API
 {
@@ -41,7 +45,19 @@ namespace FreeCourse.Services.Order.API
             services.AddScoped<ISharedIdentityService, SharedIdentityService>();
             services.AddMediatR(typeof(Application.Handlers.CreateOrderCommandHandler).Assembly);
 
-            services.AddControllers();
+            var requireAuthorizePolicy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
+            JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Remove("sub");
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
+            {
+                options.Authority = Configuration["IdentityServerURL"];
+                options.Audience = "resource_order";
+                options.RequireHttpsMetadata = false;
+            });
+            services.AddControllers(options =>
+            {
+                options.Filters.Add(new AuthorizeFilter(requireAuthorizePolicy));
+            });
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "FreeCourse.Services.Order.API", Version = "v1" });
