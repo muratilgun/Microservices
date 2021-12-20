@@ -6,3 +6,4 @@ Services
 	-orderAPI => 5015 http://localhost:5015 
 	-fakePaymentAPI => 5016 http://localhost:5016 
 	-identityServer => 5001  http://localhost:5001
+	-Gateway => 5000  http://localhost:5000
