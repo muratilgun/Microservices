@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FreeCourse.Web.Models
 {
-    public class SignInInput
+    public class SigninInput
     {
         [Display(Name = "Email adresiniz")]
         public string Email { get; set; }

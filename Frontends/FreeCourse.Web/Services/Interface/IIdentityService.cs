@@ -10,7 +10,7 @@ namespace FreeCourse.Web.Services.Interface
 {
     public interface IIdentityService
     {
-        Task<Response<bool>> SignIn(SignInInput input);
+        Task<Response<bool>> SignIn(SigninInput input);
         Task<TokenResponse> GetAccessTokenByRefreshToken();
         Task RevokeRefreshToken();
     }
