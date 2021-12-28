@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using FreeCourse.Web.Models;
 using FreeCourse.Web.Services;
 using FreeCourse.Web.Services.Interface;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace FreeCourse.Web
 {
@@ -29,6 +30,14 @@ namespace FreeCourse.Web
             services.AddHttpClient<IIdentityService, IdentityService>();
             services.Configure<ClientSettings>(Configuration.GetSection("ClientSettings"));
             services.Configure<ServiceApiSettings>(Configuration.GetSection("ServiceApiSettings"));
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(CookieAuthenticationDefaults.AuthenticationScheme,
+                opt =>
+                {
+                    opt.LoginPath = "/Auth/SignIn";
+                    opt.ExpireTimeSpan =TimeSpan.FromDays(60);
+                    opt.SlidingExpiration = true;
+                    opt.Cookie.Name = "webcookie";
+                });
             services.AddControllersWithViews();
         }
 
@@ -46,7 +55,7 @@ namespace FreeCourse.Web
             app.UseStaticFiles();
 
             app.UseRouting();
-
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
