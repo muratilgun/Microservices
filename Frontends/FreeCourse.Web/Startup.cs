@@ -11,6 +11,7 @@ using FreeCourse.Web.Models;
 using FreeCourse.Web.Services;
 using FreeCourse.Web.Services.Interface;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using System.Runtime.ConstrainedExecution;
 
 namespace FreeCourse.Web
 {
@@ -29,7 +30,11 @@ namespace FreeCourse.Web
             services.AddHttpContextAccessor();
             services.AddHttpClient<IIdentityService, IdentityService>();
             services.Configure<ClientSettings>(Configuration.GetSection("ClientSettings"));
-            services.Configure<ServiceApiSettings>(Configuration.GetSection("ServiceApiSettings"));
+            var serviceApiSettings = Configuration.GetSection("ServiceApiSettings").Get<ServiceApiSettings>();
+            services.AddHttpClient<IUserService, UserService>(opt =>
+            {
+                opt.BaseAddress = new Uri(serviceApiSettings.IdentityBaseUri);
+            });
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(CookieAuthenticationDefaults.AuthenticationScheme,
                 opt =>
                 {
