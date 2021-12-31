@@ -7,5 +7,6 @@ namespace FreeCourse.Web.Services.Interface
 {
     public interface IUserService
     {
+
     }
 }
