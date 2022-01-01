@@ -12,6 +12,7 @@ using FreeCourse.Web.Services;
 using FreeCourse.Web.Services.Interface;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using System.Runtime.ConstrainedExecution;
+using FreeCourse.Web.Handler;
 
 namespace FreeCourse.Web
 {
@@ -34,7 +35,7 @@ namespace FreeCourse.Web
             services.AddHttpClient<IUserService, UserService>(opt =>
             {
                 opt.BaseAddress = new Uri(serviceApiSettings.IdentityBaseUri);
-            });
+            }).AddHttpMessageHandler<ResourceOwnerPasswordTokenHandler>();
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(CookieAuthenticationDefaults.AuthenticationScheme,
                 opt =>
                 {
