@@ -12,6 +12,7 @@ using FreeCourse.Web.Services;
 using FreeCourse.Web.Services.Interface;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using System.Runtime.ConstrainedExecution;
+using FreeCourse.Shared.Services;
 using FreeCourse.Web.Handler;
 
 namespace FreeCourse.Web
@@ -33,7 +34,7 @@ namespace FreeCourse.Web
             services.AddHttpContextAccessor();
 
             var serviceApiSettings = Configuration.GetSection("ServiceApiSettings").Get<ServiceApiSettings>();
-
+            services.AddScoped<ISharedIdentityService, SharedIdentityService>();
             services.AddScoped<ResourceOwnerPasswordTokenHandler>();
             services.AddHttpClient<IIdentityService, IdentityService>();
             services.AddHttpClient<ICatalogService, CatalogService>(opt =>
