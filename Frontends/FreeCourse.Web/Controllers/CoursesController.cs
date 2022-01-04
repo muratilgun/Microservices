@@ -21,9 +21,9 @@ namespace FreeCourse.Web.Controllers
             _sharedIdentityService = sharedIdentityService;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            return View(await _catalogService.GetAllCourseByUserIdAsync(_sharedIdentityService.GetUserId));
         }
     }
 }
