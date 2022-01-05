@@ -35,6 +35,7 @@ namespace FreeCourse.Web
 
             var serviceApiSettings = Configuration.GetSection("ServiceApiSettings").Get<ServiceApiSettings>();
             services.AddScoped<ISharedIdentityService, SharedIdentityService>();
+            services.AddHttpClient<IClientCredentialTokenService, ClientCredentialTokenService>();
             services.AddScoped<ResourceOwnerPasswordTokenHandler>();
             services.AddHttpClient<IIdentityService, IdentityService>();
             services.AddHttpClient<ICatalogService, CatalogService>(opt =>
