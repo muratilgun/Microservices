@@ -55,29 +55,26 @@ namespace FreeCourse.Web.Controllers
         {
             var course = await _catalogService.GetByCourseIdAsync(id);
             var categories = await _catalogService.GetAllCategoryAsync();
+
             if (course == null)
             {
-
+                //mesaj göster
                 RedirectToAction(nameof(Index));
             }
-            ViewBag.categoryList = new SelectList(categories, "Id", "Name",course.Id);
-            if (course != null)
+            ViewBag.categoryList = new SelectList(categories, "Id", "Name", course.Id);
+            CourseUpdateInput courseUpdateInput = new()
             {
-                CourseUpdateInput courseUpdateInput = new()
-                {
-                    Id = course.Id,
-                    Name = course.Name,
-                    Description = course.Description,
-                    Price = course.Price,
-                    Feature = course.Feature,
-                    CategoryId = course.UserId,
-                    Picture = course.Picture
-                };
+                Id = course.Id,
+                Name = course.Name,
+                Description = course.Description,
+                Price = course.Price,
+                Feature = course.Feature,
+                CategoryId = course.CategoryId,
+                UserId = course.UserId,
+                Picture = course.Picture
+            };
 
-
-            }
             return View(courseUpdateInput);
-
         }
     }
 }
