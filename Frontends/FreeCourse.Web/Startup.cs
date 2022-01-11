@@ -14,6 +14,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using System.Runtime.ConstrainedExecution;
 using FreeCourse.Shared.Services;
 using FreeCourse.Web.Handler;
+using FreeCourse.Web.Helpers;
 
 namespace FreeCourse.Web
 {
@@ -34,7 +35,7 @@ namespace FreeCourse.Web
             services.AddHttpContextAccessor();
             services.AddAccessTokenManagement();
             services.AddScoped<ISharedIdentityService, SharedIdentityService>();
-
+            services.AddSingleton<PhotoHelper>();
 
 
 
@@ -45,7 +46,7 @@ namespace FreeCourse.Web
 
             services.AddScoped<ResourceOwnerPasswordTokenHandler>();
             services.AddScoped<ClientCredentialTokenHandler>();
-
+            
 
             services.AddHttpClient<IClientCredentialTokenService, ClientCredentialTokenService>();
             services.AddHttpClient<IIdentityService, IdentityService>();
