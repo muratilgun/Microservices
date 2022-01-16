@@ -5,9 +5,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using FreeCourse.Web.Models.Baskets;
 using FreeCourse.Web.Services.Interface;
+using Microsoft.AspNetCore.Authorization;
 
 namespace FreeCourse.Web.Controllers
 {
+    [Authorize]
     public class BasketController : Controller
     {
         private readonly ICatalogService _catalogService;
