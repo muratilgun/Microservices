@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Net.Http.Json;
 using System.Threading.Tasks;
+using FreeCourse.Shared.Dtos;
 using FreeCourse.Web.Models.Discounts;
 using FreeCourse.Web.Services.Interface;
 
@@ -20,6 +22,10 @@ namespace FreeCourse.Web.Services
         public async Task<DiscountViewModel> GetDiscount(string discountCode)
         {
             var response = await _httpClient.GetAsync($"Discounts/GetByCode/{discountCode}");
+            if (!response.IsSuccessStatusCode) return null;
+
+            var discount = await response.Content.ReadFromJsonAsync<Response<DiscountViewModel>>();
+            return discount.Data;
         }
 
     }
