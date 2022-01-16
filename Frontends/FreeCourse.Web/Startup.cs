@@ -12,10 +12,13 @@ using FreeCourse.Web.Services;
 using FreeCourse.Web.Services.Interface;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using System.Runtime.ConstrainedExecution;
+using FluentValidation.AspNetCore;
 using FreeCourse.Shared.Services;
 using FreeCourse.Web.Extensions;
 using FreeCourse.Web.Handler;
 using FreeCourse.Web.Helpers;
+using FreeCourse.Web.Models.Catalogs;
+using FreeCourse.Web.Validators;
 
 namespace FreeCourse.Web
 {
@@ -57,7 +60,7 @@ namespace FreeCourse.Web
                 opts.Cookie.Name = "webcookie";
             });
 
-            services.AddControllersWithViews();
+            services.AddControllersWithViews().AddFluentValidation(fv=> fv.RegisterValidatorsFromAssemblyContaining<CourseCreateInputValidator>());
         }
 
 
