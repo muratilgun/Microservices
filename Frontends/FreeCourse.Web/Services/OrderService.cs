@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
 using FreeCourse.Web.Models.Orders;
 using FreeCourse.Web.Services.Interface;
@@ -9,12 +10,17 @@ namespace FreeCourse.Web.Services
 {
     public class OrderService : IOrderService
     {
-        public async Task<OrderCreatedViewModel> CreateOrder(CheckOutInfoInput checkOutInfoInput)
+        private readonly IPaymentService _paymentService;
+        private readonly HttpClient _httpClient;
+        private readonly IBasketService _basketService;
+        public OrderService(IPaymentService paymentService, HttpClient httpClient, IBasketService basketService)
         {
-            throw new NotImplementedException();
+            _paymentService = paymentService;
+            _httpClient = httpClient;
+            _basketService = basketService;
         }
 
-        public async Task SuspendOrder(CheckOutInfoInput checkOutInfoInput)
+        public async Task<OrderCreatedViewModel> CreateOrder(CheckOutInfoInput checkOutInfoInput)
         {
             throw new NotImplementedException();
         }
@@ -23,5 +29,10 @@ namespace FreeCourse.Web.Services
         {
             throw new NotImplementedException();
         }
+        public async Task SuspendOrder(CheckOutInfoInput checkOutInfoInput)
+        {
+            throw new NotImplementedException();
+        }
+
     }
 }
