@@ -30,16 +30,34 @@ namespace FreeCourse.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> Checkout(CheckOutInfoInput checkOutInfoInput)
         {
-            var orderStatus = await _orderService.CreateOrder(checkOutInfoInput);
-            if (!orderStatus.IsSuccessful)
+
+            #region 1.yol sekron iletişim
+            //var orderStatus = await _orderService.CreateOrder(checkOutInfoInput);
+            //if (!orderStatus.IsSuccessful)
+            //{
+            //    var basket = await _basketService.Get();
+            //    ViewBag.basket = basket;
+            //    ViewBag.error = orderStatus.Error;
+            //    return View();
+            //}
+
+            //return RedirectToAction(nameof(SuccessfulChekcout), new { orderId = orderStatus.OrderId }); 
+            #endregion
+
+
+            #region 2. yol asekron iletişim
+            //2. yol asekron iletişim
+            var orderSuspend = await _orderService.SuspendOrder(checkOutInfoInput);
+            if (!orderSuspend.IsSuccessful)
             {
                 var basket = await _basketService.Get();
                 ViewBag.basket = basket;
-                ViewBag.error = orderStatus.Error;
+                ViewBag.error = orderSuspend.Error;
                 return View();
             }
-
-            return RedirectToAction(nameof(SuccessfulChekcout), new { orderId = orderStatus.OrderId });
+            // suspende sadece true /false dönüyorum şuanda yapıyı değiştirmemek adına burada random değer dönüp test ediyorum
+            return RedirectToAction(nameof(SuccessfulChekcout), new { orderId = new Random().Next(1,1000)});
+            #endregion
         }
 
         public IActionResult SuccessfulChekcout(int orderId)
