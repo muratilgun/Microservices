@@ -18,6 +18,9 @@ using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Threading.Tasks;
+using FreeCourse.Services.Basket.Consumer;
+using MassTransit;
+using FreeCourse.Services.Order.Application.Consumer;
 
 namespace FreeCourse.Services.Basket
 {
@@ -32,6 +35,29 @@ namespace FreeCourse.Services.Basket
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddMassTransit(x =>
+            {
+                x.AddConsumer<CourseNameChangeEventBasketConsumer>();
+                // Default Port : 5672
+                x.UsingRabbitMq((context, cfg) =>
+                {
+                    cfg.Host(Configuration["RabbitMQUrl"], "/", host =>
+                    {
+                        host.Username("guest");
+                        host.Password("guest");
+                    });
+
+                    //consumer eklendikten sonra hangi endpointi okuyacaðýný belirtiyoruz.
+
+                    cfg.ReceiveEndpoint("course-name-changed-event-basket-service", e =>
+                    {
+                        e.ConfigureConsumer<CourseNameChangeEventBasketConsumer>(context);
+                    });
+                });
+            });
+
+            services.AddMassTransitHostedService();
+
             services.AddHttpContextAccessor();
             services.AddScoped<ISharedIdentityService, SharedIdentityService>();
             services.AddScoped<IBasketService, BasketService>();
