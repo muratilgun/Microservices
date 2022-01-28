@@ -9,11 +9,11 @@ services:
       - catalogdb_volume:/data/db
   basketdb:
     container_name: basketdb
-    restart: always   
+    restart: always
     ports:
       - "6379:6379"
-  discount:
-    container_name: discount
+  discountdb:
+    container_name: discountdb
     restart: always
     ports:
       - "5432:5432"
@@ -51,7 +51,7 @@ services:
       - "15672:15672"
   catalog.api:
     container_name: catalog.api
-    enviroment:
+    environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - RabbitMQUrl:rabbitmq
       - IdentityServerURL:http://identityserver.api:5001
@@ -62,9 +62,9 @@ services:
       - catalogdb
   identityserver.api:
     container_name: identityserver.api
-    enviroment:
+    environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - "ConnectionStrings:DefaultConnection=Server=identitydb,1433;Database=IdentityDb;User=sa;Password=Password12*"
+      - "ConnectionStrings:DefaultConnection=Server=identitydb,1433;Database=IdentityDb; User=sa; Password=Password12*"
     ports:
       - "5001:80"
     depends_on:
