@@ -36,7 +36,7 @@ namespace FreeCourse.Services.FakePayment
                 // Default Port : 5672
                 x.UsingRabbitMq((context, cfg) =>
                 {
-                    cfg.Host(Configuration["RabbitMQUrl"],"/", host =>
+                    cfg.Host(Configuration["RabbitMQUrl"], "/", host =>
                     {
                         host.Username("guest");
                         host.Password("guest");

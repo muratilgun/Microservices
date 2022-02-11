@@ -1,14 +1,11 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using FreeCourse.Services.FakePayment.Models;
+using MassTransit;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using FreeCourse.Services.FakePayment.Models;
 using FreeCourse.Shared.ControllerBases;
 using FreeCourse.Shared.Dtos;
 using FreeCourse.Shared.Messages;
-using MassTransit;
 
 namespace FreeCourse.Services.FakePayment.Controllers
 {
